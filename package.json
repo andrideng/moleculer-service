@@ -1,12 +1,14 @@
 {
     "name": "service-one",
     "version": "1.0.0",
-    "description": "",
+    "description": "Microservice Moleculer",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "gateway": "node gateway.js",
+        "broker": "node broker.js",
+        "test": "jest --watch"
     },
-    "author": "",
+    "author": "Andri Deng",
     "license": "ISC",
     "dependencies": {
         "joi": "^14.1.0",

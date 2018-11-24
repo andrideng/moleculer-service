@@ -20,7 +20,7 @@ describe('Notification Service', () => {
     });
 
     describe('Send Notification', () => {
-        it('catch error when payload is invalid', async () => {
+        it('catch error when payload is invalid', () => {
             // - mock validateSendNotification
             sandbox
                 .mock(NotificationRepository)
@@ -30,7 +30,7 @@ describe('Notification Service', () => {
                 params: VALID_PARAMS
             };
             // - call sendNotification action
-            await NotificationService
+            NotificationService
                 .actions
                 .sendNotification(context)
                 .then(() => {
@@ -41,7 +41,7 @@ describe('Notification Service', () => {
                 });
         });
 
-        it('catch error when create is failed', async () => {
+        it('catch error when sendNotification is failed', async () => {
             // - mock validateSendNotification
             sandbox
                 .mock(NotificationRepository)
@@ -55,7 +55,7 @@ describe('Notification Service', () => {
                 params: VALID_PARAMS
             };
             // - call sendNotification action
-            await NotificationService
+            NotificationService
                 .actions
                 .sendNotification(context)
                 .then(() => {
@@ -63,6 +63,34 @@ describe('Notification Service', () => {
                 })
                 .catch((error) => {
                     expect(error.message).toEqual('sendNotification failed!');
+                });
+        });
+
+        it('return ok', async () => {
+            const { from, to, message, subject } = VALID_PARAMS;
+            // - mock validateSendNotification
+            sandbox
+                .mock(NotificationRepository)
+                .expects('validateSendNotification')
+                .resolves(VALID_PARAMS);
+            sandbox
+                .mock(NotificationRepository)
+                .expects('sendNotification')
+                .resolves(`success send: ${message}, with subject: ${subject}, from: ${from}, to: ${to}`);
+            const context = {
+                params: VALID_PARAMS
+            };
+            // - call sendNotification action
+            NotificationService
+                .actions
+                .sendNotification(context)
+                .then((res) => {
+                    expect(res.status).toEqual(200);
+                    expect(res.data).toEqual(VALID_PARAMS);
+                    expect(res.message).toEqual(`success send: ${message}, with subject: ${subject}, from: ${from}, to: ${to}`);
+                })
+                .catch(() => {
+                    throw new Error('it should return ok!');
                 });
         });
     });
