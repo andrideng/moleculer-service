@@ -1,0 +1,23 @@
+{
+    "name": "service-one",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "joi": "^14.1.0",
+        "lodash": "^4.17.11",
+        "moleculer": "^0.13.4",
+        "moleculer-web": "^0.8.4",
+        "nats": "^1.0.1"
+    },
+    "devDependencies": {
+        "eslint-config-airbnb": "^17.1.0",
+        "jest": "^23.6.0",
+        "moleculer-repl": "^0.5.3"
+    }
+}
