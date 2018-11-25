@@ -53,6 +53,4 @@ npm run test
 ```
 
 ## Contributor
-```
 [ANDRI DENG](https://andrideng-com.firebaseapp.com/)
-```
